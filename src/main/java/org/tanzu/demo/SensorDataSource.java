@@ -13,14 +13,13 @@ import java.util.function.Supplier;
 @Component
 public class SensorDataSource {
 
-    private static final UUID SENSOR_ID = UUID.randomUUID();
     private final Logger log = LoggerFactory.getLogger(SensorDataSource.class);
 
     @Bean
     @Scheduled(fixedDelay = 5, timeUnit = TimeUnit.SECONDS)
     public Supplier<SensorData> sendSensorData() {
         return () -> {
-            var sensorData = SensorData.generate(SENSOR_ID);
+            var sensorData = SensorData.generate(UUID.randomUUID());
             log.info("Generated sensorData data: {}", sensorData);
             return sensorData;
         };
